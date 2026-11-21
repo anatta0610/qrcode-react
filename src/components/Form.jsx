@@ -40,7 +40,7 @@ function Form({
 
       <input
         type="file"
-        accept="image/*"
+        accept="image/png, image/jpeg, image/jpg"
         onChange={(e) => setLogoFile(e.target.files[0])}
       />
 
