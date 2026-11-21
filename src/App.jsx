@@ -50,7 +50,7 @@ function App(){
           type="text"
           value={url}
           onChange={e=>setUrl(e.target.value)}
-          palceholder="请输入链接"
+          placeholder="请输入链接"
         />
         <div className="colors">
             <label>
