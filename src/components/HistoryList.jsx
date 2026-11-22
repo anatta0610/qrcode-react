@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./HistoryList.css";
 
-const API_BASE = "http://api.codepractice.cn";
+const API_BASE = "https://api.codepractice.cn";
 
 export default function HistoryList({ refresh }) {
   const [items, setItems] = useState([]);

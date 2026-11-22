@@ -29,7 +29,7 @@ function App() {
     }
 
     try {
-      const response = await fetch("http://api.codepractice.cn/generate", {
+      const response = await fetch("https://api.codepractice.cn/generate", {
         method: "POST",
         body: formData,
       });
