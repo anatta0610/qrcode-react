@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Form from "./components/Form.jsx";
 import Result from "./components/Result.jsx";
+import HistoryList from "./components/HistoryList";
 
 function App() {
   const [url, setUrl] = useState("");
@@ -9,6 +10,7 @@ function App() {
   const [colorLight, setColorLight] = useState("#ffffff");
   const [logoFile, setLogoFile] = useState(null);
   const [qrCode, setQrCode] = useState("");
+  const [refresh, setRefresh] = useState(0);
 
   async function generate() {
     if (!url) {
@@ -38,6 +40,7 @@ function App() {
 
       const blob = await response.blob();
       setQrCode(URL.createObjectURL(blob));
+      setRefresh(refresh + 1);
     } catch (err) {
       console.error(err);
       alert("生成失败");
@@ -58,6 +61,7 @@ function App() {
         onGenerate={generate}
       />
       <Result qrCode={qrCode} />
+      <HistoryList refresh={refresh} />
     </div>
   );
 }
