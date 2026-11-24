@@ -39,6 +39,9 @@ function App() {
       }
 
       const blob = await response.blob();
+      if (qrCode) {
+        URL.revokeObjectURL(qrCode);
+      }
       setQrCode(URL.createObjectURL(blob));
       setRefresh(refresh + 1);
     } catch (err) {
