@@ -3,15 +3,18 @@ import "./HistoryList.css";
 
 const API_BASE = "https://api.codepractice.cn";
 
-export default function HistoryList({ refresh }) {
+export default function HistoryList({ refresh, token }) {
   const [items, setItems] = useState([]);
 
   // refresh 变化时重新拉取历史记录（第一次上屏也会执行一次）
   useEffect(() => {
-    fetch(`${API_BASE}/history`)
+    if (!token) return; // 没登录不发请求
+    fetch(`${API_BASE}/history`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, [refresh]);
+      .then((data) => setItems(Array.isArray(data) ? data : [])); // 白屏保险
+  }, [refresh, token]); // token 也是依赖：登录后要自动拉一次
 
   return (
     <div className="history">

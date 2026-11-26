@@ -3,6 +3,7 @@ import "./App.css";
 import Form from "./components/Form.jsx";
 import Result from "./components/Result.jsx";
 import HistoryList from "./components/HistoryList";
+import Auth from "./components/Auth.jsx";
 
 function App() {
   const [url, setUrl] = useState("");
@@ -11,6 +12,7 @@ function App() {
   const [logoFile, setLogoFile] = useState(null);
   const [qrCode, setQrCode] = useState("");
   const [refresh, setRefresh] = useState(0);
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
 
   async function generate() {
     if (!url) {
@@ -31,6 +33,7 @@ function App() {
     try {
       const response = await fetch("https://api.codepractice.cn/generate", {
         method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
         body: formData,
       });
 
@@ -50,9 +53,21 @@ function App() {
     }
   }
 
+  if (!token) {
+    return <Auth onLogin={setToken} />;
+  }
+
   return (
     <div id="app">
       <h1>二维码生成器</h1>
+      <button
+        onClick={() => {
+          localStorage.removeItem("token");
+          setToken("");
+        }}
+      >
+        退出
+      </button>
       <Form
         url={url}
         setUrl={setUrl}
@@ -64,7 +79,7 @@ function App() {
         onGenerate={generate}
       />
       <Result qrCode={qrCode} />
-      <HistoryList refresh={refresh} />
+      <HistoryList refresh={refresh} token={token} />
     </div>
   );
 }
