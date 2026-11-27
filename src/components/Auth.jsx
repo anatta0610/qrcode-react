@@ -9,6 +9,10 @@ export default function Auth({ onLogin }) {
   const [msg, setMsg] = useState("");
 
   async function submit(action) {
+    if (!username || !password) {
+      setMsg("用户名和密码不能为空");
+      return;
+    }
     const res = await fetch(`${API_BASE}/${action}`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -21,7 +25,9 @@ export default function Auth({ onLogin }) {
     } else if (data.ok) {
       submit("login"); // 注册成功，顺手自动登录
     } else {
-      setMsg(data.error || "操作失败");
+      // 422 时 detail 是数组，只认字符串，防白屏
+      const errText = typeof data.detail === "string" ? data.detail : null;
+      setMsg(errText || data.error || "操作失败");
     }
   }
 
