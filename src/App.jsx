@@ -11,6 +11,9 @@ function App() {
   const [colorLight, setColorLight] = useState("#ffffff");
   const [logoFile, setLogoFile] = useState(null);
   const [qrCode, setQrCode] = useState("");
+  const [width, setWidth] = useState("256");
+  const [errorCorrection, setErrorCorrection] = useState("H");
+
   const [refresh, setRefresh] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
@@ -22,8 +25,8 @@ function App() {
 
     const formData = new FormData();
     formData.append("url", url);
-    formData.append("width", "256");
-    formData.append("error_correction", "H");
+    formData.append("width", width);
+    formData.append("error_correction", errorCorrection);
     formData.append("color_dark", colorDark);
     formData.append("color_light", colorLight);
     if (logoFile) {
@@ -85,6 +88,10 @@ function App() {
         colorLight={colorLight}
         setColorLight={setColorLight}
         setLogoFile={setLogoFile}
+        width={width}
+        setWidth={setWidth}
+        errorCorrection={errorCorrection}
+        setErrorCorrection={setErrorCorrection}
         onGenerate={generate}
       />
       <Result qrCode={qrCode} />

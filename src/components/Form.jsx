@@ -8,6 +8,10 @@ function Form({
   colorLight,
   setColorLight,
   setLogoFile,
+  width,
+  setWidth,
+  errorCorrection,
+  setErrorCorrection,
   onGenerate,
 }) {
   return (
@@ -18,7 +22,29 @@ function Form({
         onChange={(e) => setUrl(e.target.value)}
         placeholder="请输入链接"
       />
-
+      <div className="params">
+        <label>
+          尺寸
+          <select value={width} onChange={(e) => setWidth(e.target.value)}>
+            <option value="128">128</option>
+            <option value="256">256</option>
+            <option value="512">512</option>
+            <option value="1024">1024</option>
+          </select>
+        </label>
+        <label>
+          容错
+          <select
+            value={errorCorrection}
+            onChange={(e) => setErrorCorrection(e.target.value)}
+          >
+            <option value="L">L 7%</option>
+            <option value="M">M 15%</option>
+            <option value="Q">Q 25%</option>
+            <option value="H">H 30%</option>
+          </select>
+        </label>
+      </div>
       <div className="colors">
         <label>
           前景
