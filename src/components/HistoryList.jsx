@@ -26,25 +26,31 @@ export default function HistoryList({ refresh, token }) {
         <span className="history-logo">Logo</span>
         <span className="history-time">时间</span>
       </div>
-      <ul className="history-list">
-        {items.map((item) => (
-          <li key={item.id} className="history-item">
-            <span className="history-dark">
-              <i style={{ background: item.color_dark }}></i>
-            </span>
-            <span className="history-light">
-              <i style={{ background: item.color_light }}></i>
-            </span>
-            <span className="history-text" title={item.url}>
-              {item.url}
-            </span>
-            <span className="history-logo">{item.has_logo ? "有" : "无"}</span>
-            <span className="history-time">
-              {item.created_at.slice(0, 19).replace("T", " ")}
-            </span>
-          </li>
-        ))}
-      </ul>
+      {items.length === 0 ? (
+        <p className="history-empty">暂无记录</p>
+      ) : (
+        <ul className="history-list">
+          {items.map((item) => (
+            <li key={item.id} className="history-item">
+              <span className="history-dark">
+                <i style={{ background: item.color_dark }}></i>
+              </span>
+              <span className="history-light">
+                <i style={{ background: item.color_light }}></i>
+              </span>
+              <span className="history-text" title={item.url}>
+                {item.url}
+              </span>
+              <span className="history-logo">
+                {item.has_logo ? "有" : "无"}
+              </span>
+              <span className="history-time">
+                {item.created_at.slice(0, 19).replace("T", " ")}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

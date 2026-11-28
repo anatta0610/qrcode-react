@@ -62,24 +62,27 @@ function App() {
 
   return (
     <div id="app">
-      <h1>二维码生成器</h1>
-      <button
-        onClick={async () => {
-          try {
-            // 先通知服务器作废这张票
-            await fetch("https://api.codepractice.cn/logout", {
-              method: "POST",
-              headers: { Authorization: `Bearer ${token}` },
-            });
-          } finally {
-            // 无论服务器答不答应，本地必清
-            localStorage.removeItem("token");
-            setToken("");
-          }
-        }}
-      >
-        退出
-      </button>
+      <div className="app-header">
+        <h1>二维码生成器</h1>
+        <button
+          className="btn-ghost"
+          onClick={async () => {
+            try {
+              // 先通知服务器作废这张票
+              await fetch("https://api.codepractice.cn/logout", {
+                method: "POST",
+                headers: { Authorization: `Bearer ${token}` },
+              });
+            } finally {
+              // 无论服务器答不答应，本地必清
+              localStorage.removeItem("token");
+              setToken("");
+            }
+          }}
+        >
+          退出
+        </button>
+      </div>
       <Form
         url={url}
         setUrl={setUrl}

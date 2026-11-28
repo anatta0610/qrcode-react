@@ -1,5 +1,6 @@
 .history {
   margin-top: 24px;
+  text-align: left;   /* 整个区块脱离卡片的居中体系，独立左对齐 */
 }
 
 .history-head,
@@ -12,13 +13,13 @@
 }
 
 .history-head {
-  border-bottom: 1px solid #cccccc;
-  color: #999999;
+  border-bottom: 1px solid var(--color-divider);
+  color: var(--color-text-secondary);
   font-size: 12px;
 }
 
 .history-item {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid 	var(--color-divider);
 }
 
 .history-list {
@@ -40,7 +41,7 @@
   width: 16px;
   height: 16px;
   border-radius: 4px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid 	var(--color-divider);
 }
 
 .history-text {
@@ -54,13 +55,26 @@
 .history-logo {
   width: 36px;
   flex-shrink: 0;
-  color: #999999;
+  color: var(--color-text-secondary);
   font-size: 12px;
   text-align: center;
 }
 
 .history-time {
-  color: #999999;
+  color: var(--color-text-secondary);
   font-size: 12px;
   flex-shrink: 0;
+}
+
+.history h2 {
+  font-size: 16px;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.history-empty {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  text-align: center;
+  padding: 16px 0;
 }
